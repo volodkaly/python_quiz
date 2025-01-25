@@ -47,7 +47,7 @@ def check_answer(selected_option, button):
 # Function to reset buttons and load next question
 def reset_buttons():
     for b in buttons:
-        b.config(bg="SystemButtonFace", state=tk.NORMAL)  # Reset color and enable buttons
+        b.config(bg="lightgray", state=tk.NORMAL)  # Reset color and enable buttons
     
     global current_question_index
     current_question_index = (current_question_index + 1) % len(questions)  # Cycle through questions
