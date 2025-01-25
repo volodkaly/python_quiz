@@ -1,10 +1,26 @@
 import tkinter as tk
 import random
+import time
 
 # Create the main window
 root = tk.Tk()
 root.title("Quiz App")
-root.geometry("300x200")
+
+
+# Get the screen width and height
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+
+# Set the window size to 60% of the screen width and center it
+window_width = int(screen_width * 0.6)
+window_height = int(screen_height * 0.6)  # You can adjust this as needed
+
+# Calculate the position to center the window
+x_position = int((screen_width - window_width) / 2)
+y_position = int((screen_height - window_height) / 2)
+
+# Set the window geometry
+root.geometry(f"{window_width}x{window_height}+{x_position}+{y_position}")
 
 # Define the quiz questions and answers
 questions = [
@@ -20,6 +36,19 @@ current_question_index = 0
 # Define a label to show feedback
 feedback_label = tk.Label(root, text="", font=("Arial", 12))
 feedback_label.pack(pady=10)
+
+# Define a label for the timer (elapsed time)
+elapsed_time_label = tk.Label(root, text="Elapsed Time: 0s", font=("Arial", 12))
+elapsed_time_label.pack(pady=10)
+
+# Initialize start time
+start_time = time.time()
+
+# Function to update the elapsed time
+def update_elapsed_time():
+    elapsed_time = int(time.time() - start_time)  # Calculate elapsed time in seconds
+    elapsed_time_label.config(text=f"Time: {elapsed_time}s")
+    root.after(1000, update_elapsed_time)  # Call this function every second
 
 # Function to check answer
 def check_answer(selected_option, button):
@@ -78,6 +107,9 @@ for _ in range(3):  # Assuming we have three options for each question
 
 # Load the first question
 load_question()
+
+# Start the timer for tracking elapsed time
+update_elapsed_time()
 
 # Run the application
 root.mainloop()
