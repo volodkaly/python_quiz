@@ -42,7 +42,7 @@ def check_answer(selected_option, button):
         b.config(state=tk.DISABLED)
 
     # Reset after a delay
-    root.after(1000, reset_buttons)
+    root.after(500, reset_buttons)
 
 # Function to reset buttons and load next question
 def reset_buttons():
